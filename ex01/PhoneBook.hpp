@@ -13,9 +13,12 @@
 #define NC "\033[0m"
 
 class PhoneBook{
-		Contact contacts[8];
 	private:
-		std::string get_non_empty_input(const std::string &);
+		Contact contacts[8];
+		std::string get_non_empty_input(std::string);
+		bool printable(std::string );
+		bool checker(std::string);
+		std::string buffer;
 	public:
 		int index;
 		void add();

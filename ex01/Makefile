@@ -2,7 +2,7 @@ CC = c++
 
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = main.cpp phonebook.cpp search.cpp
+SRC = main.cpp phonebook.cpp search.cpp contact.cpp
 OBJ = $(SRC:.cpp=.o)
 NAME = contact
 

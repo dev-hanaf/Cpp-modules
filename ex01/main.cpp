@@ -1,6 +1,7 @@
 #include "PhoneBook.hpp"
 #include <iostream>
 #include <limits>
+
 int main()
 {
 	PhoneBook nokia;
@@ -10,19 +11,19 @@ int main()
 	{
 		std::cout << CYAN;
    		std::cout << "-----------" << std::endl;
-    	std::cout << "Add" << std::endl;
-    	std::cout << "Search" << std::endl;
-    	std::cout << "Exit" << std::endl;
+    	std::cout << "ADD" << std::endl;
+    	std::cout << "SEARCH" << std::endl;
+    	std::cout << "EXIT" << std::endl;
     	std::cout << "-----------" << NC << std::endl; 
 
         std::string command;
         std::getline(std::cin >> std::ws, command);
 
-        if (command == "Add" || command == "add")
+        if (command == "ADD" || command == "add")
             nokia.add();
-		else if (command == "Search" || command == "search")
+		else if (command == "SEARCH" || command == "search")
 			nokia.search();
-        else if (command == "Exit" || command == "exit")
+        else if (command == "EXIT" || command == "exit")
         {
             std::cout << "Exiting the program. Goodbye!" << std::endl;
             return 0;
@@ -34,15 +35,3 @@ int main()
 		}
 	}
 }
-
-// int main() {
-//     int number;
-//     std::cout << "Enter a number: ";
-//     std::cin >> number;
-
-//     if (std::cin.fail()) {
-//         std::cout << "cin failed: Invalid input detected!" << std::endl;
-//     }
-
-//     return 0;
-// }
