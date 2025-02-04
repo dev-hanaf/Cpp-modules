@@ -5,8 +5,9 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
-
 #include "Contact.hpp"
+#include <cstdlib>
+
 #define GREEN "\033[32m"
 #define RED "\033[31m"
 #define CYAN "\033[36m"

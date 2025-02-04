@@ -1,9 +1,5 @@
 #include "PhoneBook.hpp"
-#include <cctype>
-#include <cstdlib>
-#include <cstring>
-#include <iostream>
-#include <string>
+
 
 void PhoneBook::search()
 {
@@ -24,7 +20,7 @@ void PhoneBook::search()
 	i = std::atoi(idx.c_str());
 	if((i==0 && idx != "0") || i > nbr || nbr==0)
 	{
-		std::cout<<"____index khaib__"<<std::endl;
+		std::cout<<"____Bad index___"<<std::endl;
 		return ;
 	}
 	if (i >= 0 && i <= 7)

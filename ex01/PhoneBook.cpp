@@ -1,5 +1,4 @@
 #include "PhoneBook.hpp"
-#include <string>
 
 bool PhoneBook::printable(std::string input) {
   int i = 0;
@@ -30,7 +29,6 @@ bool PhoneBook::checker(std::string value)
 {
   if (value == "")
   {
-    // std::cout << "EOF detectect" << std::endl;
     return (false);
   }
   buffer = value;
