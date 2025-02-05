@@ -13,7 +13,7 @@ std::string PhoneBook::get_non_empty_input(std::string prompt) {
   std::string input;
   while (true) {
     std::cout << GREEN << prompt << NC;
-    if (!std::getline(std::cin, input)) {
+    if (!std::getline(std::cin >> std::ws, input)) {
       return "";
     }
     if (!input.empty() && printable(input)) {
@@ -52,4 +52,6 @@ void PhoneBook::add() {
     return;
   contacts[index % 8].set_dark_secret(buffer);
   index++;
+  if (index == 8)
+    index = 0;
 }

@@ -5,8 +5,10 @@ int main(int ac, char** av) {
   int i = 1;
   
   if (ac == 1)
+  {
+    std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
     return (1);
-  
+  }
   while (i < ac)
   {
     for(size_t j=0; j < strlen(av[i]); j++)
