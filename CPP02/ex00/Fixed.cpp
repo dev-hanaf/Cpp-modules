@@ -1,5 +1,7 @@
 #include "Fixed.hpp"
 
+const int Fixed::fractionalBits = 8;
+
 Fixed::Fixed() : fixedPointNumber(0)
 {
     std::cout << "Default constructor called" << std::endl;
@@ -8,7 +10,6 @@ Fixed::Fixed() : fixedPointNumber(0)
 Fixed::Fixed(const Fixed &obj)
 {
     std::cout << "Copy constructor called" << std::endl;
-    // this->fixedPointNumber = obj.fixedPointNumber;
     *this = obj;
 }
 

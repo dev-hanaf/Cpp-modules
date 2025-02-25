@@ -1,13 +1,14 @@
 #include "Fixed.hpp"
+#include <climits>
+#include <ostream>
 
-Fixed::Fixed() : fixedPointNumber(0)
-{
-}
+const int Fixed::fractionalBits = 8;
+
+Fixed::Fixed() : fixedPointNumber(0){}
 
 Fixed::Fixed(const int num)
 {
     this->fixedPointNumber = num * (1 << this->fractionalBits);
-    // std::cout<<"fd "<<num<<"  "<<this->fixedPointNumber<<std::endl;    
 }
 
 
@@ -18,10 +19,8 @@ Fixed::Fixed(const float num)
 
 Fixed::Fixed(const Fixed &obj)
 {
-    // this->fixedPointNumber = obj.fixedPointNumber;
     *this = obj;
 }
-
 
 Fixed & Fixed::operator=(const Fixed &obj)
 {
@@ -120,11 +119,9 @@ Fixed	Fixed::operator*(const Fixed&obj)
 
 Fixed	Fixed::operator/(const Fixed&obj)
 {
-	if (obj.getRawBits() == 0)
-		return Fixed();
     float i = (float)this->fixedPointNumber / (float)obj.fixedPointNumber;
     this->fixedPointNumber = i * 256;
-	return (*this);
+	return Fixed(this->toFloat() / obj.toFloat());
 }
 
 Fixed &Fixed::operator++()
@@ -168,14 +165,14 @@ const Fixed&		Fixed::min(const Fixed& x, const Fixed& y)
     return  y;
 }
 
-Fixed&		Fixed::max(Fixed& x, Fixed& y)
+Fixed& Fixed::max(Fixed& x, Fixed& y)
 {
     if (x.getRawBits() > y.getRawBits())
         return x;
     return  y;
 }
 
-const Fixed&		Fixed::max(const Fixed& x, const Fixed& y)
+const Fixed& Fixed::max(const Fixed& x, const Fixed& y)
 {
     if (x.getRawBits() > y.getRawBits())
         return x;

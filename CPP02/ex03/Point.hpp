@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Fixed.hpp"
+
 class Point
 {
     private:
@@ -9,7 +10,7 @@ class Point
     public:
         Point();
         Point(const Point&);
-        Point(float x, float y);
+        Point(float const x, float const y);
         Point &operator=(const Point &);
         ~Point();
 

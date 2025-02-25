@@ -1,24 +1,23 @@
 #include "Fixed.hpp"
 
-Fixed::Fixed() : fixedPointNumber(0)
-{
-}
+const int Fixed::fractionalBits = 8;
+
+Fixed::Fixed() : fixedPointNumber(0){}
 
 Fixed::Fixed(const int num)
 {
     this->fixedPointNumber = num * (1 << this->fractionalBits);
-    // std::cout<<"fd "<<num<<"  "<<this->fixedPointNumber<<std::endl;    
 }
 
 
 Fixed::Fixed(const float num)
 {
+
     this->fixedPointNumber = roundf(num * (1 << this->fractionalBits));
 }
 
 Fixed::Fixed(const Fixed &obj)
 {
-    // this->fixedPointNumber = obj.fixedPointNumber;
     *this = obj;
 }
 

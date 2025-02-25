@@ -1,8 +1,10 @@
-CC = g++
+CC = c++
+#-fno-elide-constructors
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = ./a.out
 
-SRC = $(wildcard *.cpp)
+SRC = Fixed.cpp main.cpp
+
 
 OBJ = $(SRC:.cpp=.o)
 

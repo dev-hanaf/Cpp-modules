@@ -1,8 +1,8 @@
-CC = g++
+CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = ./a.out
 
-SRC = $(wildcard *.cpp)
+SRC = bsp.cpp Fixed.cpp main.cpp Point.cpp
 
 OBJ = $(SRC:.cpp=.o)
 

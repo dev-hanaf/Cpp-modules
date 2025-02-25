@@ -1,9 +1,5 @@
 #include "Point.hpp"
 #include <cmath>
-float ft_fabs(float f)
-{
-    return f >= 0 ? f : f*-1;
-}
 
 bool bsp(const Point a, const Point b, const Point c, const Point point)
 {
