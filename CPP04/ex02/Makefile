@@ -1,19 +1,19 @@
 CC = c++
-
+#  -Wshadow -Wno-shadow 
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = ClapTrap.cpp main.cpp
+SRC = $(wildcard *.cpp)
 
 OBJ = $(SRC:.cpp=.o)
 
-NAME = ClapTrap
+NAME = Animal
 
 all: $(NAME)
 
 $(NAME) : $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
-%.o : %.cpp
+%.o : %.cpp 
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

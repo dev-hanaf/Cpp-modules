@@ -1,12 +1,12 @@
 CC = c++
+#  -Wshadow -Wno-shadow 
+CFLAGS = -Wall -Wextra -Werror -Wshadow -std=c++98
 
-CFLAGS = -Wall -Wextra -Werror -std=c++98
-
-SRC = ClapTrap.cpp main.cpp
+SRC = ClapTrap.cpp DiamondTrap.cpp FragTrap.cpp main.cpp ScavTrap.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
-NAME = ClapTrap
+NAME = DiamondTrap
 
 all: $(NAME)
 

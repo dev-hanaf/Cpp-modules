@@ -2,7 +2,7 @@ CC = c++
 
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = $(wildcard *.cpp)
+SRC = ClapTrap.cpp main.cpp ScavTrap.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -23,3 +23,5 @@ fclean: clean
 	rm -rf $(NAME)
 
 re : fclean all
+
+.SECONDARY : $(OBJ)

@@ -4,24 +4,24 @@
 ClapTrap::ClapTrap()
     :name("DefaulClapTrap"),  health(10) , energyPoint(10) , attackDamage(0)
 {
-    std::cout << "default constructor called" << std::endl;
+    std::cout << "ClapTrap default constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name)
     : name(name),  health(10) , energyPoint(10) , attackDamage(0)
 {
-    std::cout << "Parameterized constructor called" << std::endl;
+    std::cout << "ClapTrap Parameterized constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& obj)
     : name(obj.name), health(obj.health), energyPoint(obj.energyPoint), attackDamage(obj.attackDamage)
 {
-    std::cout << "copy constructor called" << std::endl;
+    std::cout << "ClapTrap copy constructor called" << std::endl;
 }
 
 ClapTrap & ClapTrap::operator=(const ClapTrap &obj)
 {
-    std::cout << "copy assignment operator called" << std::endl;
+    std::cout << "ClapTrap copy assignment operator called" << std::endl;
     if (this != &obj)
     {
         this->name = obj.name;
@@ -34,7 +34,7 @@ ClapTrap & ClapTrap::operator=(const ClapTrap &obj)
 
 ClapTrap::~ClapTrap()
 {
-    std::cout << "destructor called" << std::endl;
+    std::cout << "ClapTrap estructor called" << std::endl;
 }
 
 

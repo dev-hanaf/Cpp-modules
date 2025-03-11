@@ -35,7 +35,6 @@ ScavTrap::~ScavTrap()
     std::cout << "ScavTrap destructor called" << std::endl;
 }
 
-
 void  ScavTrap::attack(const std::string& target)
 {
     if (energyPoint > 0 && health > 0)
