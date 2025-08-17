@@ -7,7 +7,7 @@ HPP = $(wildcard *.hpp)
 
 OBJ = $(SRC:.cpp=.o)
 
-NAME = btc
+NAME = PmergeMe
 
 all : $(NAME)
 
