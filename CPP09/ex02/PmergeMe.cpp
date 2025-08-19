@@ -54,10 +54,77 @@ bool PmergeMe::parseInput(int ac, char** av)
     return true;
 }
 
+
+void PmergeMe::sortPairs(std::vector<int> &arr)
+{
+    for (unsigned int i = 0; i < arr.size(); i = i + 2)
+	{
+		if (i + 1 < arr.size() && arr[i] < arr[i + 1])
+			std::swap(arr[i], arr[i + 1]);
+	}
+}
+
+
+void PmergeMe::FormGroups(std::vector<int> &groupA, std::vector<int> &groupB, std::vector<int> &arr)
+{
+    unsigned int i = 0;
+	while (i < arr.size()) {
+		groupA.push_back(arr[i++]);
+		if (i < arr.size())
+			groupB.push_back(arr[i++]);
+	}
+}
+
+
+void PmergeMe::insertPairOfFirstElm(std::vector<int>& arr, std::vector<int> &groupA,std::vector<int>& groupB) {
+	int lookFor;
+	int pair;
+	lookFor = groupA[0];
+    
+	for (unsigned int i = 0; i < arr.size(); i++)
+	{
+		if (arr[i] == lookFor)
+		{
+			if (i + 1 >= arr.size())
+				return ;
+			pair = arr[i + 1];
+			break;
+		}
+	}
+	groupA.insert(groupA.begin(), pair);
+	groupB.erase(find(groupB.begin(), groupB.end(), pair));
+}
+
+
 void PmergeMe::mergeInsertVector(std::vector<int>& arr)
 {
     if (arr.size() <= 1)
         return;
+
+    
+    sortPairs(arr); //  [15, 4, 12, 18, 9] => [15, 4, 18, 12, 9]]
+    printSequence(arr , "sort pairs: ");
+
+    std::vector<int> groupA;
+	std::vector<int> groupB;
+
+    FormGroups(groupA, groupB, arr); // A: [15, 18, 9] | B: [4, 12]
+    printSequence(groupA, "group A: ");
+    printSequence(groupB , "group B: ");
+
+    mergeInsertVector(groupA);
+    std::cout << "\n";
+
+    printSequence(groupA, "group A after recursion end: ");
+    printSequence(groupB, "group B after recursion end: ");
+
+    insertPairOfFirstElm(arr, groupA, groupB);
+    std::cout << "\n";
+    printSequence(groupA, "group A after inser pair of first element : ");
+    printSequence(groupB, "group B after inser pair of first element : ");
+
+
+
 }
 
 
