@@ -12,11 +12,14 @@ class PmergeMe
         void mergeInsertVector(std::vector<int>& arr);
         void sortPairs(std::vector<int> &arr);
 
-
-
         void FormGroups(std::vector<int> &groupA, std::vector<int> &groupB, std::vector<int> &arr);
-
         void insertPairOfFirstElm(std::vector<int>& arr, std::vector<int> &groupA,std::vector<int>& groupB);
+        
+        double getTime();
+
+        void displayResults(double vectorTime, double dequeTime, int size);
+
+
 
     public:
         PmergeMe();

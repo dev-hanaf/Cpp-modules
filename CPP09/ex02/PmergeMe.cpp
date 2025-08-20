@@ -1,13 +1,21 @@
 #include "PmergeMe.hpp"
 #include <algorithm>
+#include <cmath>
 #include <cstddef>
 #include <sstream>
 #include <vector>
-
+#include <sys/time.h>
 
 PmergeMe::PmergeMe(){}
 
 PmergeMe::~PmergeMe(){}
+
+
+double PmergeMe::getTime() {
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return tv.tv_sec * 1000000.0 + tv.tv_usec;
+}
 
 void PmergeMe::printSequence(const std::vector<int>& arr, const std::string& prefix) const {
     std::cout << prefix;
@@ -96,6 +104,51 @@ void PmergeMe::insertPairOfFirstElm(std::vector<int>& arr, std::vector<int> &gro
 }
 
 
+int Jacobsthal( int idx) {
+	if (idx == 0) return ( 1 );
+	return ( (std::pow(2, idx) - std::pow(-1, idx)) / 3 );
+}
+
+std::vector<int> calculationOrderOfInsertion( int size) {
+	std::vector<int> order;
+	std::vector<bool> used(size, false);
+	int idx;
+	int js = 2;
+	while ((int) order.size() < size) {
+		idx = Jacobsthal(js) - 1;
+		while (idx >= size || used[idx] == true) {
+			idx = (idx >= size) ? size - 1 : idx + 1;
+			if (idx >= size) {
+				idx = 0;
+				while (idx < size && used[idx] == true)
+					++idx;
+			}
+		}
+		used[idx] = true;
+		order.push_back(idx);
+		++js;
+	}
+	return ( order );
+}
+
+
+void BinaryInsertion(std::vector<int> &groupA,  int toAdd )
+{
+	int left = 0, right = groupA.size() - 1;
+	unsigned int mid;
+
+	while (left <= right)
+	{
+		mid = (left + right) / 2;
+		if (toAdd > groupA[mid]) {
+			left = mid + 1;
+		} else {
+			right = mid - 1;
+		}
+	}
+	groupA.insert(groupA.begin() + left, toAdd);
+}
+
 void PmergeMe::mergeInsertVector(std::vector<int>& arr)
 {
     if (arr.size() <= 1)
@@ -103,146 +156,54 @@ void PmergeMe::mergeInsertVector(std::vector<int>& arr)
 
     
     sortPairs(arr); //  [15, 4, 12, 18, 9] => [15, 4, 18, 12, 9]]
-    printSequence(arr , "sort pairs: ");
+    // printSequence(arr , "sort pairs: ");
 
     std::vector<int> groupA;
 	std::vector<int> groupB;
 
     FormGroups(groupA, groupB, arr); // A: [15, 18, 9] | B: [4, 12]
-    printSequence(groupA, "group A: ");
-    printSequence(groupB , "group B: ");
+    // printSequence(groupA, "group A: ");
+    // printSequence(groupB , "group B: ");
 
     mergeInsertVector(groupA);
-    std::cout << "\n";
+    // std::cout << "\n";
 
-    printSequence(groupA, "group A after recursion end: ");
-    printSequence(groupB, "group B after recursion end: ");
+    // printSequence(groupA, "group A after recursion end: ");
+    // printSequence(groupB, "group B after recursion end: ");
 
     insertPairOfFirstElm(arr, groupA, groupB);
-    std::cout << "\n";
-    printSequence(groupA, "group A after inser pair of first element : ");
-    printSequence(groupB, "group B after inser pair of first element : ");
+    // printSequence(groupA, "group A after inser pair of first element : ");
+    // printSequence(groupB, "group B after inser pair of first element : ");
 
+    std::vector< int> insertionOrder= calculationOrderOfInsertion(groupB.size());
+    // printSequence(insertionOrder , "insertion order : ");
 
+	unsigned int toInsert;
+	for (unsigned int i = 0; i < groupB.size(); i++) {
+		toInsert = insertionOrder[i];
+		BinaryInsertion(groupA, groupB[toInsert]);
+	}
+	arr = groupA;
 
 }
 
+
+void PmergeMe::displayResults(double vectorTime, double dequeTime, int size) {
+    std::cout << "Time to process a range of " << size << " elements with std::vector : " 
+              << vectorTime << " us" << std::endl;
+    std::cout << "Time to process a range of " << size << " elements with std::deque : " 
+              << dequeTime << " us" << std::endl;
+}
 
 void PmergeMe::sortAndTime()
 {
-    printSequence(vectorContainer , "Before: ");
-    mergeInsertVector(vectorContainer);
+    double startTime = getTime();
+    printSequence(vectorContainer, "Before: ");
+    mergeInsertVector(vectorContainer);;
+    double endTime = getTime();
+    double vectorTime = endTime - startTime;
+    printSequence(vectorContainer, "After: ");
+    displayResults(vectorTime, vectorTime, vectorContainer.size());
+
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// void PmergeMe::parse(const std::string & str)
-// {
-
-//     std::istringstream iss(str);
-//     int num;
-//     while(iss >> num)
-//     {
-//         vectorContainer.push_back(num);
-//     }
-
-//     display(vectorContainer);
-// }      
-
-
-// void sortvectorContaineraypairs(std::vector<int > &vectorContainer, std::vector<int> &winners, std::vector<int > &losers)
-// {
-//     std::sort(vectorContainer.begin(), vectorContainer.end());
-//     for(size_t i = 0; i < vectorContainer.size(); i++)
-//     {
-//         if (vectorContainer[i] && vectorContainer[i+1])
-//         {
-//             if (vectorContainer[i] < vectorContainer[i+1])
-//             {
-//                 winners.push_back(vectorContainer[i+1]);
-//                 losers.push_back(vectorContainer[i]);
-//                 i++;
-//             }
-//             else
-//             {
-//                 winners.push_back(vectorContainer[i]);
-//                 losers.push_back(vectorContainer[i +1]);
-//                 i++;
-//             }
-//         }
-//         else
-//             winners.push_back(vectorContainer[i++]);
-//     }
-// }
-
-
-
-
-// void PmergeMe::winners()
-// {
-//     if (vectorContainer.size() < 2)
-//         return ;
-
-//     std::vector<int> winners;
-//     std::vector<int> losers;
-
-
-//     sortvectorContaineraypairs(vectorContainer, winners, losers);
-//     std::cout << "sorted vectorContaineray" << std::endl;
-
-//     display(vectorContainer);
-
-//     std::cout << "winners" << std::endl;
-//     display(winners);
-//     std::cout << "losers" << std::endl;
-//     display(losers);
-
-// }
-
-
-
