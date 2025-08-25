@@ -1,9 +1,8 @@
 CXX = c++ -std=c++98
 
-CXXFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CXXFLAGS = -Wall -Wextra -Werror
 
-SRC = $(wildcard *.cpp)
-HPP = $(wildcard *.hpp)
+SRC = main.cpp PmergeMe.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -11,7 +10,7 @@ NAME = PmergeMe
 
 all : $(NAME)
 
-$(NAME) : $(OBJ) $(HPP) 
+$(NAME) : $(OBJ)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 %.o : %.cpp 

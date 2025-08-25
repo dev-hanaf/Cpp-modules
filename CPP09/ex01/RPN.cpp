@@ -59,7 +59,6 @@ int RPN::evaluate(const std::string &expression)
     }
     
     while (iss >> token) {
-        std::cout << "token " << token << std::endl;
         if (isNumber(token)) {
             int num;
             std::stringstream ss(token);
